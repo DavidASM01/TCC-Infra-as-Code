@@ -1,0 +1,30 @@
+---
+  - name: Copiando arquivos do front-end e definindo propretário e permissões dos arquivos.
+    copy: # Modulo de copia de arquivos. 
+      src: ./frontend-files
+      dest: /home/ubuntu/
+      owner: ubuntu 
+      group: docker
+      mode: '0664'
+    become: yes
+
+  - name: Configurando ip privado atual do banco de dados no docker-compose.  
+    replace: # Módulo que substitui todas as instâncias de um padrão em um arquivo.
+      path: /home/ubuntu/frontend-files/docker-compose.yml
+      regexp: 'IP_DB'
+      replace: "{{ IP_DB }}" # Recebe esse parametro em uma variavel informada pela integração com terraform.
+    become: yes
+
+  - name: Iniciando o conteiner da aplicação.
+    docker_compose: # Modulo de inicialização do docker-compose. 
+      project_src: /home/ubuntu/frontend-files/
+      build: yes
+    register: output
+    become: yes
+
+  - name: Informando endereço do site. # Mensangem amigavél exibida no final das configurações.
+    debug: # Modulo de que exibe informações da tela de controle do Ansible.
+      msg:
+        - 'Seu portal esta pronto no endereço: {{ dns_webserver }}' # Recebe esse parametro em uma variavel informada pela integração com terraform.
+        - 'Observações:'
+        - '- Pode ser necessário até 15 min para propagação do endereço no DNS Global'

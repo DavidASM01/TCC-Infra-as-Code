@@ -1,0 +1,20 @@
+version: '3.5' # Versão do arquivo.
+
+services: # Nesta parte declaramos os contêineres a serem iniciados e suas carateristicas. 
+  webbudget: # Declaração do nome do serviço.
+    build: ./ # Indica a necessidade de construção local da imagem através do arquivo dockerfile e indica sua localização no disco. 
+    image: webbudget:1.0 # Nome da imagen docker a ser gerada. 
+    container_name: webbudget_app # Nome do contêiner.
+    ports: # Portas a serem expostas no contêiner. 
+      - "9993:9993"
+      - "443:443"
+      - "80:80"
+    extra_hosts: # Apontamento do endereço de rede do banco de dados. 
+      - "postgres:IP_DB" # Este endereço de rede e informado pela integração com a ferramenta de provisonamento (Terraform).
+    networks: # Declaração do grupo de rede do contêiner.
+      - webbudget_network
+  
+networks: # Nesta parte criamos os grupos de rede e suas caracteristicas.
+  webbudget_network: # Criação do grupo de rede.
+    name: webbudget # Nome do grupo de rede.
+    driver: bridge # Tipo de conectividade da rede.

@@ -1,0 +1,16 @@
+---
+    - name: Copiando arquivos do back-end e definindo proprietário e permissões dos arquivos.
+      copy: # modulo de cópia de arquivos. 
+        src: ./backend-files
+        dest: /home/ubuntu 
+        owner: ubuntu 
+        group: docker 
+        mode: '0664' 
+      become: yes
+ 
+    - name: Iniciando o contêiner do banco de dados.
+      docker_compose: # Modulo de inicialização do docker-compose. 
+        project_src: /home/ubuntu/backend-files/
+        build: no
+      register: output
+      become: yes

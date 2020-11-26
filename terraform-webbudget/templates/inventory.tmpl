@@ -1,0 +1,19 @@
+all:
+    children:
+        backend:
+            hosts:
+                db-machine:
+                    ansible_host: ${db-machine-ip}
+                    ansible_user: ubuntu
+                    ansible_ssh_private_key_file: ./inventory/webbudget.pem
+        frontend:
+            hosts:
+                web-machine-1:
+                    ansible_host: ${web-machine-ip}
+                    ansible_user: ubuntu
+                    ansible_ssh_private_key_file: ./inventory/webbudget.pem
+                
+                web-machine-2:
+                    ansible_host: ${web-machine2-ip}
+                    ansible_user: ubuntu
+                    ansible_ssh_private_key_file: ./inventory/webbudget.pem

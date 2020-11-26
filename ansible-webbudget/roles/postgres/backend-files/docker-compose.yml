@@ -1,0 +1,20 @@
+version: '3.5' # Versão do arquivo.
+
+services: # Nesta parte declaramos os conteineres a serem iniciados e suas carateristicas. 
+  postgres: # Declaração do nome do serviço.
+    image: postgres:11.2-alpine # Indica o nome da imagem docker a ser baixada na nuvem do docker.
+    container_name: webbudget_db # Nome do contêiner.
+    ports: # Portas a serem expostas no contêiner.
+      - "5432:5432"
+    environment: # Informa as variáveis de ambiente do sistema. 
+      - POSTGRES_DB=webbudget
+      - POSTGRES_USER=sa_webbudget
+      - POSTGRES_PASSWORD=sa_webbudget
+      - POSTGRES_PORT=5432
+    networks: # Declaração do grupo de rede do contêiner.
+      - webbudget_network  
+networks: # Nesta parte criamos os grupos de rede e suas caracteristicas.
+  webbudget_network: # Criação do grupo de rede.
+    name: webbudget  # Nome do grupo de rede.
+    driver: bridge # Tipo de conectividade da rede.
+

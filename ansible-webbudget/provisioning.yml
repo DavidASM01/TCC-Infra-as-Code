@@ -1,0 +1,12 @@
+---    
+  - hosts: all # Declara a qual o grupo ou máquina do inventário a role ou task será executada.
+    roles: # Indica a lista de roles a ser executada no host ou grupo de destino.
+      - docker # Nome da role a ser executada.
+  
+  - hosts: backend # Declara a qual o grupo ou máquina do inventário a role ou task será executada.
+    roles: # Indica a lista de roles a ser executada no host ou grupo de destino.
+      - postgres # Nome da role a ser executada.
+
+  - hosts: frontend # Declara a qual o grupo ou máquina do inventário a role ou task será executada.
+    roles: # Indica a lista de roles a ser executada no host ou grupo de destino.
+      - webbudget # Nome da role a ser executada.
