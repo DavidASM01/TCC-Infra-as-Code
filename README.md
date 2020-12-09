@@ -11,7 +11,7 @@ Projeto consiste em demostrar a automatização de uma aplicação completa web 
   - Combinação das tecnologias docker/docker-compose com Ansible.
   - Melhoria do código com utilização de roles 
   - Inventario dinamico do Ansible com o recurso local-exec do terraform.
-  -
+  - Criação do certificado digital diretamente pela AWS.
 
 ### Instalação
 
